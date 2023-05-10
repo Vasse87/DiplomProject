@@ -6,11 +6,6 @@ import org.junit.jupiter.api.Test;
 public class CreditAccountTest {
     @Test//Сообщение об ошибке, т.к. начальный баланс не может быть отрицательным
     public void shouldNotAddedConstructorNegativeInitialBalance() {
-        CreditAccount account = new CreditAccount(
-                -10_000,
-                100_000,
-                18
-        );
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new CreditAccount(-10_000, 100_000, 18);
@@ -20,11 +15,6 @@ public class CreditAccountTest {
 
     @Test//Сообщение об ошибке, т.к. кредитный лимит не может быть отрицательным
     public void shouldNotAddedConstructorNegativeCreditLimit() {
-        CreditAccount account = new CreditAccount(
-                10_000,
-                -100_000,
-                18
-        );
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new CreditAccount(10_000, -100_000, 18);
@@ -33,12 +23,7 @@ public class CreditAccountTest {
 
     @Test//Сообщение об ошибки, т.к. кредитная ставка не может быть отрицательной
     public void shouldNotAddedConstructorNegativeRate() {
-        CreditAccount account = new CreditAccount(
-                10_000,
-                100_000,
-                -18
-        );
-
+        
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new CreditAccount(10_000, 100_000, -18);
         });
@@ -99,14 +84,14 @@ public class CreditAccountTest {
     @Test//Покупка осуществляется, т.к.сумма покупки равна сумме начального баланса и кредитного лимита
     public void shouldPayAmountEqualCreditLimit() {
         CreditAccount account = new CreditAccount(
-                2_000,
+                1_000,
                 5_000,
                 15
         );
-        account.pay(7_000);
+        account.pay(6_000);
 
         Assertions.assertEquals(-5_000, account.getBalance());
-        Assertions.assertFalse(account.pay(7_000));
+        Assertions.assertFalse(account.pay(6_000));
     }
 
     @Test//Покупка не осуществляется, т.к. сумма покупки превышает сумму начального баланса и кредитного лимита
