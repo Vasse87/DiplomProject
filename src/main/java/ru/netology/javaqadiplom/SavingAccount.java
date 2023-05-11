@@ -95,9 +95,8 @@ public class SavingAccount extends Account {
     public boolean add(int amount) {
         if (amount <= 0) {
             return false;
-        }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        } else if (balance - amount > minBalance) {
+            balance = balance + amount;
             return true;
         } else {
             return false;
